@@ -1,10 +1,10 @@
 'use strict';
 
 // Imports dependencies and set up http server
-const
-  express = require('express'),
-  bodyParser = require('body-parser'),
-  app = express().use(bodyParser.json()); // creates express http server
+const PAGE_ACCESS_TOKEN = "EAApfg9GZCFzQBANyMj3xNZCRbHD30RHGmemfhkqTZAoPqvwZB5rrDnZC9pWQvqkJmtvCGBCk2Tdx1TlTyIg9sIwGSpZCc0BnJDPyTOtGhUXPz2gpQJWXxy2CxBMBYxihPSMoNDzq5NDuZCuogk0LvrCX0R69rRY6EkyfXF8IB1YxAZDZD";
+  let express = require('express');
+  let bodyParser = require('body-parser');
+  let app = express().use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -40,17 +40,20 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
-  let VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>"
+  let VERIFY_TOKEN = 'babyYoda';
 
   // Parse the query params
   let mode = req.query['hub.mode'];
   let token = req.query['hub.verify_token'];
   let challenge = req.query['hub.challenge'];
+  console.log(mode, 'this is mode');
+  console.log(token, 'this is token');
 
   // Checks if a token and mode is in the query string of the request
   if (mode && token) {
 
     // Checks the mode and token sent is correct
+    console.log('i've entered');
     if (mode === 'subscribe' && token === VERIFY_TOKEN) {
 
       // Responds with the challenge token from the request
